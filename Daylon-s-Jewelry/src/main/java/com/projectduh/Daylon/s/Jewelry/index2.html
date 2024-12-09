@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewelry Store</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    
+</head>
+<body ng-app="jewelryApp" ng-controller="myController">
+    <h2>{{main.introMessage}}</h2>
+    <script>
+        angular.module('jewelryApp', [])
+            .controller('MyController', function($http) {
+                var vm = this;
+                vm.introMessage = '';
+
+                $http.get('http://localhost:8080/api')
+                    .then(function(response) {
+                        vm.introMessage = response.data;
+                    }, function(error) {
+                        console.error('Error fetching welcome message:', error);
+                    });
+            });
+    </script>
+
+    <section class="banner" id="home">
+        <h1>Welcome to Our Jewelry Store</h1>
+        <p>Browse through our wonderful and elegant selection!</p>
+    </section>
+
+    <section class="products" id="products">
+        <h2>Featured Products</h2>
+        <div class="product-grid">
+            <div class="product-item">
+                 <img src="/images/greenring.jpg" height="150" width="100">
+                <h3 style ="color: green;">Green Diamond Ring</h3>
+                <p>$599.99</p>
+            </div>
+            <div class="product-item">
+                <img src="/images/lavishnecklace.png" height="150" width="100">
+                <h3 style ="color: blue;">Lavish Necklace</h3>
+                <p>$139.99</p>
+            </div>
+            <div class="product-item">
+                <img src="/images/diamondbraclet" height="150" width="100">
+                <h3 style ="color: red;">Diamond Bracelet</h3>
+                <p>$349.99</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Jewelry Store. All rights reserved.</p>
+    </footer>
+    </body>
+</html>
